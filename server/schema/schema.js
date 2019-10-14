@@ -96,7 +96,7 @@ const Mutation = new GraphQLObjectType({
             type: MovieType,
             args: {
                 name:  { type: new GraphQLNonNull(GraphQLString) },
-                gender: { type: new GraphQLNonNull(GraphQLString)},
+                genre: { type: new GraphQLNonNull(GraphQLString)},
                 directorId: { type: GraphQLID },
                 rate: { type: GraphQLInt },
                 watched: { type: new GraphQLNonNull(GraphQLBoolean) }
@@ -134,7 +134,7 @@ const Mutation = new GraphQLObjectType({
                 age: { type: new GraphQLNonNull(GraphQLInt) }
             },
             resolve(parent, args) {
-                return Directors.findAndUpdate(
+                return Directors.findByIdAndUpdate(
                     args.id,
                     { $set: { name: args.name, age: args.age } },
                     { new: true }
@@ -152,7 +152,7 @@ const Mutation = new GraphQLObjectType({
                 watched: { type: new GraphQLNonNull(GraphQLBoolean) }
             },
             resolve(parent, args) {
-                return Movies.findAndUpdate(
+                return Movies.findByIdAndUpdate(
                     args.id,
                     { $set: { name: args.name, genre: args.genre, directorId: args.directorId, rate: args.rate, watched: args.watched } },
                     { new: true }
